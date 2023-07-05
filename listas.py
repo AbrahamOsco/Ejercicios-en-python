@@ -95,11 +95,11 @@ Indices = []
 
 #cargamos los vectores de manera aleatoria:
 import random
-def cargamosDatos():
+def cargamosDatosRandom():
     tamanioActual = 0
     while(tamanioActual < 100 ):
         unaEdad = random.randint(15,30)        #te escupe un entero entre:   15<= enteroRandom <= 30
-        unIndice = random.uniform(3.0, 10.0)   #te escupe floats random:  3.0 <= floatRandom <= 10.0   
+        unIndice = random.uniform(3.8, 9.0)   #te escupe floats random:  3.0 <= floatRandom <= 10.0   
         unIndice = round(unIndice,2 )          #Truncamos el indice obtenido con  2 decimales, usamos round para lograrlo.    
         unSexo = random.choice( ["M", "F"])    #te escupe un string random "M" o "F"
 
@@ -123,17 +123,23 @@ def calcularMedidaPorSexo(unSexo):
 
 
 def eliminarMenorIndiceYMostrar():
-    menorIndice = Indices[0]
+    menorIndice = Indices[0]     #suponemos que el primer elemento de la lista es el de menor indice.
+    #Encontramos el menor indice
     for i in range(0,100):
         if menorIndice > Indices[i]:
             menorIndice = Indices[i]
     
+    posicionesAEliminar = []
     for i in range(0,100):
         if Indices[i] == menorIndice:
             print("Edad: ", Edades[i], "Indice: ", Indices[i], "Sexo: ", Sexos[i])
-            Edades.pop(i) #Eliminamos el elemento de la posicion i-esima
-            Indices.pop(1) 
-            Sexos.pop(i)
+            posicionesAEliminar.append(i)
+    for posicion in posicionesAEliminar:
+        Indices.pop(posicion)
+        Sexos.pop(posicion)
+        Indices.pop(posicion)
+    
+    
 
 def ordenadosPorIndiceMayorAMenor():
     #Agrupo tanto edad sexo e Indice a esa asociacion lo llamo unAlumno (como juntas galletas en un empaque de galletas asi ).
@@ -149,9 +155,10 @@ def ordenadosPorIndiceMayorAMenor():
     print(ordenados)                                                  # mira la posicion 2 le pertenece a indice ordenamos por ese criteri
 
 
-cargamosDatos()
+cargamosDatosRandom()
 ordenadosPorIndiceMayorAMenor()
-
+#calcularMedidaPorSexo("F")
+#eliminarMenorIndiceYMostrar()
 
 
 
