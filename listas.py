@@ -52,7 +52,7 @@ numerosUno.sort(reverse=True)
 print("Lista ordeanada de mayor a menor : ",numerosUno)
 
 # Quiero sacar el 4 de la lista ? como hago ?  -> Con remove 
-numerosUno.remove(4);
+numerosUno.remove(4)
 print("Lista sin el elemento 4: ",numerosUno)
 
 
@@ -78,6 +78,79 @@ for i in range(0 , len(listaEdificios) ):
         acumuladorCapacidad += listaPuestos[i]
 
 print(" acumulador de capacidad Edificio A : ", acumuladorCapacidad)
+
+
+
+
+#Ejercicio 4)
+"""" 
+Tenemos 3 vectores de Edad, sexo e Indice. Sabemos ademas que su tamanio tiene un tope que es 100. (Tope = cantidad maxima de elementos de una lista o vector)
+
+"""
+
+
+Edades = []
+Sexos = []
+Indices = []
+
+#cargamos los vectores de manera aleatoria:
+import random
+def cargamosDatos():
+    tamanioActual = 0
+    while(tamanioActual < 100 ):
+        unaEdad = random.randint(15,30)        #te escupe un entero entre:   15<= enteroRandom <= 30
+        unIndice = random.uniform(3.0, 10.0)   #te escupe floats random:  3.0 <= floatRandom <= 10.0   
+        unIndice = round(unIndice,2 )          #Truncamos el indice obtenido con  2 decimales, usamos round para lograrlo.    
+        unSexo = random.choice( ["M", "F"])    #te escupe un string random "M" o "F"
+
+        if( (unaEdad>=17 and unaEdad<=24 ) and ( unIndice>=3.80 and unIndice<=9)  ):         #en general en el if poner el caso "feliz" es mas sencillo
+            Edades.append(unaEdad)
+            Sexos.append(unSexo)
+            Indices.append(unIndice)
+            tamanioActual +=1
+
+
+def calcularMedidaPorSexo(unSexo):
+    indiceAcumulado = 0
+    cantidadPersonasDelSexo = 0
+    for i in range(0,100): #este for su intervalo es -> [0,100)
+        if Sexos[i]== unSexo:
+            indiceAcumulado +=Indices[i]
+            cantidadPersonasDelSexo +=1
+
+    media = indiceAcumulado/cantidadPersonasDelSexo
+    print("La medida especifica por  el sexo", unSexo,"es: ", media  )
+
+
+def eliminarMenorIndiceYMostrar():
+    menorIndice = Indices[0]
+    for i in range(0,100):
+        if menorIndice > Indices[i]:
+            menorIndice = Indices[i]
+    
+    for i in range(0,100):
+        if Indices[i] == menorIndice:
+            print("Edad: ", Edades[i], "Indice: ", Indices[i], "Sexo: ", Sexos[i])
+            Edades.pop(i) #Eliminamos el elemento de la posicion i-esima
+            Indices.pop(1) 
+            Sexos.pop(i)
+
+def ordenadosPorIndiceMayorAMenor():
+    #Agrupo tanto edad sexo e Indice a esa asociacion lo llamo unAlumno (como juntas galletas en un empaque de galletas asi ).
+    matrixAlumnos = []
+    for i in range(0, 100):
+        unAlumno = []
+        unAlumno.append( Sexos[i] )
+        unAlumno.append( Edades[i] )
+        unAlumno.append( Indices[i] )
+        matrixAlumnos.append(unAlumno)
+    #Ahora que tengo una lista con datos para cada alumno ordeno por indice. 
+    ordenados = sorted(matrixAlumnos, key= lambda alumno: alumno[2] ) # ordena a los alumnos por indice. porque 2? -> 
+    print(ordenados)                                                  # mira la posicion 2 le pertenece a indice ordenamos por ese criteri
+
+
+cargamosDatos()
+ordenadosPorIndiceMayorAMenor()
 
 
 
