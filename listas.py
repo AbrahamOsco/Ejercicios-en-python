@@ -151,7 +151,7 @@ def ordenadosPorIndiceMayorAMenor():
         unAlumno.append( Indices[i] )
         matrixAlumnos.append(unAlumno)
     #Ahora que tengo una lista con datos para cada alumno ordeno por indice. 
-    ordenados = sorted(matrixAlumnos, key= lambda alumno: alumno[2] ) # ordena a los alumnos por indice. porque 2? -> 
+    ordenados = sorted(matrixAlumnos, key= lambda alumno: alumno[2] , reverse=True ) # ordena a los alumnos por indice. porque 2? -> 
     print(ordenados)                                                  # mira la posicion 2 le pertenece a indice ordenamos por ese criteri
 
 
