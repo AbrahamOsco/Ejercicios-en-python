@@ -38,6 +38,7 @@ def getListSinRepetidos(unaLista), def getMax(unaLista), def getMin(unaLista).
 y que podrian ser reutilizadas en otros archivos del codigo. 
 """
 
+
 import random
 
 # Sistema de control de stocks 
@@ -47,12 +48,17 @@ def agregarNuevoProducto(productos = [], nuevoProducto = []):
     if len(productos) == 0 :
         productos.append(nuevoProducto)
     elif len(productos) > 0:
-        productosConCodRepetido = list(filter(lambda unProducto: unProducto[0] == nuevoProducto[0], productos) )
-        if(len(productosConCodRepetido) == 0):
+        productosConCodRepetido = []
+        for unProducto in productos:
+            if unProducto[0] == nuevoProducto[0]:       # pregunto si existe un producto ya almacenado cuyo codigo coincide con el nuevoProducto q estan ingresando
+                productosConCodRepetido.append(unProducto)
+
+
+        if(len(productosConCodRepetido) == 0):  # si no tenemos ningun elemento repetido entonces lo agregamos 
             productos.append(nuevoProducto)
             return True
         else: 
-            print(f"Error No se pudo agregar el producto, El codigo de producto: {nuevoProducto[1]} ya existe: ")
+            print(f"Error No se pudo agregar el producto, El codigo del producto: {nuevoProducto[1]} ya existe: ")
             return False
 
 def printProducto(unProducto):
@@ -62,25 +68,37 @@ def printProducto(unProducto):
 def printRegistroCompletoProductos(productos = []):
     productosPorCodProd = sorted(productos, key=lambda unProducto: unProducto[0]) # del mas chico al mas grande
     print("Codigo de producto\t\t\t Nombre\t\t\t StockActual")
-    list(map(lambda unProducto: printProducto(unProducto), productosPorCodProd))  # Funcion map no ejecuta la funcion prinProducto por si sola necesitamos ponerle list() para q la ejecute 
-
+    for unProducto in productosPorCodProd:
+        printProducto(unProducto)
 
 def printProductosDebajoDelStockMin(productos = []):
-    productoStockMin = list(filter(lambda unProducto: unProducto[2] < 5, productos))
+    productoStockMin = []
+    for unProducto in productos:            # Nos piden filtrar los producto cuyo stock  sea menor que 5. 
+        if(unProducto[2] < 5 ):
+            productoStockMin.append(unProducto)
+
     if( len(productoStockMin) > 0 ):
         print("Codigos de los productos que esta debajo del stock minimo (5): \n")
-        list(map(lambda unProducto: print(f" {unProducto[0]}\n "), productoStockMin))
+        for unProducto in productoStockMin:
+            print(f" {unProducto[0]}\n ")
     else: 
         print("No hay ningun producto cuyo stock este por debajo del minimo (5) \n")
 
         
 def printProductosMayorCantEnStock(productos = []):
-    stocks =  list(map(lambda unProducto: unProducto[2], productos)) #  de todos los productos nos quedamos con todos los stocks.
+    stocks = []
+    for unProducto in productos:
+        stocks.append(unProducto[2])
+        
     maxStock = sorted(stocks, reverse=True)[0] # ordenamos del mas grande al mas chico y obtenemos el primer valor (el maximo). 
     print(f"La mayor cantidad en stock es {maxStock}\n")
-    productosConStockMax = list(filter(lambda unProducto: unProducto[2] == maxStock, productos ))
+    productosConStockMax = []
+    for unProducto in productos:                
+        if(unProducto[2] == maxStock):          # pregunto si este producto tiene un stock igual al maximo encontrado anteriormente 
+            productosConStockMax.append(unProducto)
     print("Codigo de productos que tienen el stock Maximo: \n")
-    list(map(lambda unProducto: print(f"{unProducto[0]}\n "), productosConStockMax))
+    for unProducto in productosConStockMax:
+        print(f"{unProducto[0]}\n ")
 
 
 def ingresoCodProducto():
