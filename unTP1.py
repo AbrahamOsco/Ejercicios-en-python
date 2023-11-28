@@ -106,17 +106,6 @@ def printProductosMayorCantEnStock(productos = []):
         print(f"{unProducto[0]}\n ")
 
 
-def ingresoCodProducto():
-    seIngresoConExito = False
-    codProducto = 0
-    while( not seIngresoConExito ):
-        codProducto = int (input("Ingrese el codigo del producto: "))
-        if(codProducto < 1000 or codProducto > 9999):
-            print("Error el codigo de producto debe ser entre 1000 y 9999 inclusives")
-        else: 
-            seIngresoConExito = True
-    return codProducto
-
 def ingresoProductos():
     productos = [] 
     # productos sera una matriz (lista de lista) y cada elemento de esta "lista" "productos" sera otra lista con el codigoProducto, nombre, stock)
