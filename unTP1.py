@@ -127,7 +127,7 @@ def ingresoProductos():
         if( modelo == ""):
             break
     
-        codProducto = ingresoCodProducto()
+        codProducto = random.randint(1000, 9999)
         numberStock = random.randint(0,100)  # Random de [0,100] incluye limites.
         unProducto = [codProducto, modelo, numberStock]
         agregarNuevoProducto(productos, unProducto)
