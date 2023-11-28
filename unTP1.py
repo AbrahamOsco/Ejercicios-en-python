@@ -113,20 +113,20 @@ def ingresoCodProducto():
     return codProducto
 
 def ingresoProductos():
-    cantMaxProductos = 2  # Es el valor N de la consigna.
-    i = 0       #Se asignan a variables como: i,j,k, para iterar listas, matrices,etc 
     productos = [] 
     # productos sera una matriz (lista de lista) y cada elemento de esta "lista" "productos" sera otra lista con el codigoProducto, nombre, stock)
     # seria algo asi:  ej: productos = [ [1002, "AlfajorOreo", 15], [3015, "Doritos", 5], ... ];
-
-    while( i < cantMaxProductos):
-        modelo = input("Ingrese el nombre del modelo : ")
+    
+    while(True):
+        modelo = input("Ingrese el nombre del modelo: (o Enter para salir) \n")
+        if( modelo == ""):
+            break
+    
         codProducto = ingresoCodProducto()
         numberStock = random.randint(0,100)  # Random de [0,100] incluye limites.
         unProducto = [codProducto, modelo, numberStock]
-
-        if( agregarNuevoProducto(productos, unProducto)):
-            i +=1
+        agregarNuevoProducto(productos, unProducto)
+            
 
     printRegistroCompletoProductos(productos)
     printProductosDebajoDelStockMin(productos)
