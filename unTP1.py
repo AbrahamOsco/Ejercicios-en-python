@@ -48,18 +48,23 @@ def agregarNuevoProducto(productos = [], nuevoProducto = []):
     if len(productos) == 0 :
         productos.append(nuevoProducto)
     elif len(productos) > 0:
-        productosConCodRepetido = []
+        prodCodRepetido = []
+        prodModeloRepetido = []
+
         for unProducto in productos:
-            if unProducto[0] == nuevoProducto[0]:       # pregunto si existe un producto ya almacenado cuyo codigo coincide con el nuevoProducto q estan ingresando
-                productosConCodRepetido.append(unProducto)
+            if unProducto[0] == nuevoProducto[0] : # Chequeo si tiene el mismo codigo de producto  
+                prodCodRepetido.append(nuevoProducto)
+            if unProducto[1] == nuevoProducto[1]:  # chequeo si tiene el mismo el mismo modelo(nombre): 
+                prodModeloRepetido.append(nuevoProducto)
 
 
-        if(len(productosConCodRepetido) == 0):  # si no tenemos ningun elemento repetido entonces lo agregamos 
+        if(len(prodCodRepetido) == 0 and len(prodModeloRepetido) == 0):  # si no tenemos ningun elemento en ambas listas(de repetidos) entonces lo agregamos 
             productos.append(nuevoProducto)
-            return True
-        else: 
-            print(f"Error No se pudo agregar el producto, El codigo del producto: {nuevoProducto[1]} ya existe: ")
-            return False
+        elif ( len(prodCodRepetido) > 0 ): 
+            print(f"Error No se pudo agregar el producto, El codigo de producto: {nuevoProducto[0]} ya existe: ")
+        if (len(prodModeloRepetido) > 0 ):
+            print(f"Error No se pudo agregar el producto, El modelo del producto: '{nuevoProducto[1]}' ya existe: ")
+    
 
 def printProducto(unProducto):
     print(f"{unProducto[0]}\t\t\t\t {unProducto[1]}\t\t\t\t {unProducto[2]}", end="\t\t\n")
